@@ -1,22 +1,25 @@
+import Footer from "../../components/Footer";
+import Navbar from "../../components/Navbar";
 
 
 const Dashboard = () => {
     return (
         <div>
-            <body className="md:bg-gray-100">
+            <Navbar />
+            <body className="md:bg-gray-100 min-h-screen">
                 <div className="min-h-full">
                     <div className="bg-blue-300 flex justify-between">
                         <div className=" max-w-7xl px-4 py-6 bg-blue-300 sm:px-6 lg:px-8 hidden lg:block md:block">
 
                             <img className=" flex-1 w-48 h-48 rounded-full shadow-lg" src="https://static.independent.co.uk/2023/09/14/15/WOLFPACK_Gallery_Kristin_10232022_FO_0064_aprRT.jpg?width=1200&height=1200&fit=crop" alt="" />
                         </div>
-                        <div className="bg-blue-300  max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+                        <div className="bg-blue-300 hidden md:block max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
                             <h1 className=" text-3xl font-sans tracking-tight text-gray-900">
                                 Charlot Daniel Abbot
                             </h1>
                         </div>
 
-                        <div className="bg-blue-300 mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+                        <div className="bg-blue-300 mx-auto max-w-7xl px-4 hidden md:block py-6 sm:px-6 lg:px-8">
 
                             <div className="flex justify-between">
 
@@ -94,6 +97,7 @@ const Dashboard = () => {
                     </main>
                 </div>
             </body>
+            <Footer />
         </div>
     );
 };
