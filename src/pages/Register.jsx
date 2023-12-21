@@ -11,7 +11,6 @@ const Register = () => {
     const [showPassword, setShowPassword] = useState(false)
     const [showConPassword, setShowConPassword] = useState(false)
     const { registerUserWithEmailAndPassword, user } = useContext(AuthContext);
-    console.log(user);
 
     async function handleRegister(event) {
         event.preventDefault();
@@ -24,7 +23,6 @@ const Register = () => {
 
         const formData = new FormData();
         formData.append('image', profilePic);
-        console.log(profilePic);
 
         const toastId = toast.loading('Working...');
 

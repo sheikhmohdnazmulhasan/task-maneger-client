@@ -1,10 +1,14 @@
 import { NavLink, Outlet } from "react-router-dom";
 import Swal from "sweetalert2";
 import { LuLogIn } from "react-icons/lu";
+import { useContext } from "react";
+import { AuthContext } from "./AuthProvider";
+import { signOut } from "firebase/auth";
+import { auth } from "./firebase.config";
+import toast, { Toaster } from "react-hot-toast";
 
 const Root = () => {
-
-    const user = false
+    const { user } = useContext(AuthContext);
 
     const navItem = <>
         <div className="md:flex gap-3 space-y-3 md:space-y-0">
@@ -21,8 +25,14 @@ const Root = () => {
         })
     }
 
+    function handleLogout() {
+        signOut(auth)
+        toast.success('Logged Out')
+    }
+
     return (
         <div>
+            <Toaster />
             {/* Navbar */}
             <div className="drawer">
                 <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
@@ -55,7 +65,7 @@ const Root = () => {
                                             </a>
                                         </li>
                                         <li><a>Settings</a></li>
-                                        <li><a>Logout</a></li>
+                                        <li onClick={handleLogout}><a>Logout</a></li>
                                     </ul>
                                 </div> :
                                     <NavLink to={'/login'} className='flex items-center gap-1'>Login <LuLogIn className="text-2xl" /> </NavLink>}
@@ -77,7 +87,7 @@ const Root = () => {
                                         </a>
                                     </li>
                                     <li><a>Settings</a></li>
-                                    <li><a>Logout</a></li>
+                                    <li onClick={handleLogout}><a>Logout</a></li>
                                 </ul>
                             </div>
                         </div> :
