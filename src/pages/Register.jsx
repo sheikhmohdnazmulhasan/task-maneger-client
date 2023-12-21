@@ -1,4 +1,5 @@
 import { useState } from "react";
+import toast, { Toaster } from "react-hot-toast";
 import { IoEye, IoEyeOff } from "react-icons/io5";
 import { Link } from "react-router-dom";
 
@@ -13,14 +14,26 @@ const Register = () => {
         const email = form.email.value;
         const password = form.password.value;
         const conPassword = form.conPassword.value;
-        const profilePic = form.profilePic.value;
+        const profilePic = form.profilePic.files[0];
 
-        console.log(name, email, password, conPassword);
-    
+        const toastId = toast.loading('Working...');
+
+        const regex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
+
+        if (!regex.test(password)) {
+            toast.error('Password must have minimum eight characters, at least one letter, one number and one special character', { id: toastId });
+            return
+
+        } else if (password !== conPassword) {
+            toast.error('Password did not match!', { id: toastId });
+            return
+        }
+
     }
 
     return (
         <div>
+            <div><Toaster /></div>
             <div className="flex flex-col justify-center font-[sans-serif] my-20 text-[#333] sm:h-screen p-4">
                 <div className="max-w-md w-full mx-auto border border-gray-300 rounded-md p-6">
                     <div className="text-center mb-12">
@@ -60,7 +73,7 @@ const Register = () => {
                                     type="file" />
                             </div>
                             <div className="flex items-center">
-                                <input id="remember-me" name="remember-me" type="checkbox" className="h-4 w-4 shrink-0 text-blue-600 focus:ring-blue-500 border-gray-300 rounded" required/>
+                                <input id="remember-me" name="remember-me" type="checkbox" className="h-4 w-4 shrink-0 text-blue-600 focus:ring-blue-500 border-gray-300 rounded" required />
                                 <label htmlFor="remember-me" className="ml-3 block text-sm">
                                     I accept the <a href="javascript:void(0);" className="text-blue-600 font-semibold hover:underline ml-1">Terms and Conditions</a>
                                 </label>
