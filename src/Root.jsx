@@ -1,7 +1,17 @@
-import { Outlet } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
 import Swal from "sweetalert2";
+import { LuLogIn } from "react-icons/lu";
 
 const Root = () => {
+
+    const user = false
+
+    const navItem = <>
+        <div className="md:flex gap-3 space-y-3 md:space-y-0">
+            <p><NavLink>Navbar Item 1</NavLink></p>
+            <p><NavLink>Navbar Item 2</NavLink></p>
+        </div>
+    </>
 
     function handleAppDownloadButton() {
         Swal.fire({
@@ -29,10 +39,9 @@ const Root = () => {
                             <div className="flex items-center">
                                 <ul className="menu menu-horizontal">
                                     {/* Navbar menu content here */}
-                                    <li><a>Navbar Item 1</a></li>
-                                    <li><a>Navbar Item 2</a></li>
+                                    {navItem}
                                 </ul>
-                                <div className="dropdown dropdown-end">
+                                {user ? <div className="dropdown dropdown-end">
                                     <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
                                         <div className="w-10 rounded-full">
                                             <img alt="Tailwind CSS Navbar component" src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
@@ -48,29 +57,31 @@ const Root = () => {
                                         <li><a>Settings</a></li>
                                         <li><a>Logout</a></li>
                                     </ul>
-                                </div>
+                                </div> :
+                                    <NavLink to={'/login'} className='flex items-center gap-1'>Login <LuLogIn className="text-2xl" /> </NavLink>}
                             </div>
-                           
+
                         </div>
-                        <div className="flex justify-end md:hidden">
-                                <div className="dropdown dropdown-end">
-                                    <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
-                                        <div className="w-10 rounded-full">
-                                            <img alt="Tailwind CSS Navbar component" src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
-                                        </div>
+                        {user ? <div className="flex justify-end md:hidden">
+                            <div className="dropdown dropdown-end">
+                                <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
+                                    <div className="w-10 rounded-full">
+                                        <img alt="Tailwind CSS Navbar component" src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
                                     </div>
-                                    <ul tabIndex={0} className="mt-3 z-50 bg-white p-2 shadow menu menu-sm dropdown-content rounded-box w-52">
-                                        <li>
-                                            <a className="justify-between">
-                                                Profile
-                                                <span className="badge">New</span>
-                                            </a>
-                                        </li>
-                                        <li><a>Settings</a></li>
-                                        <li><a>Logout</a></li>
-                                    </ul>
                                 </div>
+                                <ul tabIndex={0} className="mt-3 z-50 bg-white p-2 shadow menu menu-sm dropdown-content rounded-box w-52">
+                                    <li>
+                                        <a className="justify-between">
+                                            Profile
+                                            <span className="badge">New</span>
+                                        </a>
+                                    </li>
+                                    <li><a>Settings</a></li>
+                                    <li><a>Logout</a></li>
+                                </ul>
                             </div>
+                        </div> :
+                            <NavLink to={'/login'} className='flex md:hidden items-center gap-1'>Login <LuLogIn className="text-2xl" /> </NavLink>}
                     </div>
                     {/* Page content here */}
                     <Outlet />
@@ -79,8 +90,7 @@ const Root = () => {
                     <label htmlFor="my-drawer-3" aria-label="close sidebar" className="drawer-overlay"></label>
                     <ul className="menu p-4 w-80 min-h-full bg-base-200 bg-opacity-90 z-50">
                         {/* Sidebar content here */}
-                        <li><a>Sidebar  1</a></li>
-                        <li><a>Sidebar Item 2</a></li>
+                        {navItem}
                     </ul>
                 </div>
             </div>
