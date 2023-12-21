@@ -1,12 +1,17 @@
 import axios from "axios";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { IoEye, IoEyeOff } from "react-icons/io5";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../AuthProvider";
+import { updateProfile } from "firebase/auth";
+import { auth } from "../firebase.config";
 
 const Register = () => {
     const [showPassword, setShowPassword] = useState(false)
     const [showConPassword, setShowConPassword] = useState(false)
+    const { registerUserWithEmailAndPassword, user } = useContext(AuthContext);
+    console.log(user);
 
     async function handleRegister(event) {
         event.preventDefault();
@@ -37,9 +42,14 @@ const Register = () => {
         const response = await axios.post(`https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMGBB_API}`, formData);
 
         if (response.data.success) {
-            
+            registerUserWithEmailAndPassword(email, password).then(() => {
+                updateProfile(auth.currentUser, { displayName: name, photoURL: response.data.data.display_url });
+                toast.success('Account created.', { id: toastId });
+
+            }).catch(err => toast.error(err.code, { id: toastId }));
+
         } else {
-            toast.error('Picture Not Uploaded to Database!')
+            toast.error('Picture Not Uploaded to Database!');
         }
 
     }

@@ -19,10 +19,10 @@ const AuthProvider = ({ children }) => {
             setUser(currentUser);
             setIsLoading(false)
         });
-        return () => unsubscribe()
+        return () => unsubscribe();
     }, []);
 
-    const authentication = { name: 'nazmul' }
+    const authentication = { isLoading, user, registerUserWithEmailAndPassword }
 
     return <AuthContext.Provider value={authentication}>{children}</AuthContext.Provider>
 };
