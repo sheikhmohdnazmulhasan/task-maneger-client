@@ -1,6 +1,7 @@
 import { FaLaptopCode } from "react-icons/fa";
 import { RiBankCardFill } from "react-icons/ri";
 import { GrUserManager } from "react-icons/gr";
+import Testimonial from "../components/Testimonial";
 
 
 const Home = () => {
@@ -42,6 +43,9 @@ const Home = () => {
                         </div>
                     </div>
                 </div>
+            </div>
+            <div className="">
+         <Testimonial/>
             </div>
         </div>
     );
