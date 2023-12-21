@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { IoEye, IoEyeOff } from "react-icons/io5";
@@ -7,7 +8,7 @@ const Register = () => {
     const [showPassword, setShowPassword] = useState(false)
     const [showConPassword, setShowConPassword] = useState(false)
 
-    function handleRegister(event) {
+    async function handleRegister(event) {
         event.preventDefault();
         const form = event.target;
         const name = form.name.value;
@@ -15,6 +16,10 @@ const Register = () => {
         const password = form.password.value;
         const conPassword = form.conPassword.value;
         const profilePic = form.profilePic.files[0];
+
+        const formData = new FormData();
+        formData.append('image', profilePic);
+        console.log(profilePic);
 
         const toastId = toast.loading('Working...');
 
@@ -27,6 +32,14 @@ const Register = () => {
         } else if (password !== conPassword) {
             toast.error('Password did not match!', { id: toastId });
             return
+        }
+
+        const response = await axios.post(`https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMGBB_API}`, formData);
+
+        if (response.data.success) {
+            
+        } else {
+            toast.error('Picture Not Uploaded to Database!')
         }
 
     }
