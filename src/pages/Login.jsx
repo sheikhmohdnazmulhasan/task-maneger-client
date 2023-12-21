@@ -14,8 +14,7 @@ const Login = () => {
         const password = event.target.password.value;
         const toastId = toast.loading('Working...')
 
-        logInWithEmailAndPassword(email, password).then(user => {
-            console.log(user.user);
+        logInWithEmailAndPassword(email, password).then(() => {
             toast.success('Login Successful', { id: toastId });
 
         }).catch(err => toast.error(err.code, { id: toastId }));

@@ -60,7 +60,7 @@ const Root = () => {
                                     <ul tabIndex={0} className="mt-3 z-50 bg-white p-2 shadow menu menu-sm dropdown-content rounded-box w-52">
                                         <li>
                                             <a className="justify-between">
-                                                Profile
+                                            {user.displayName}
                                                 <span className="badge">New</span>
                                             </a>
                                         </li>
@@ -82,8 +82,7 @@ const Root = () => {
                                 <ul tabIndex={0} className="mt-3 z-50 bg-white p-2 shadow menu menu-sm dropdown-content rounded-box w-52">
                                     <li>
                                         <a className="justify-between">
-                                            Profile
-                                            <span className="badge">New</span>
+                                            {user.displayName}
                                         </a>
                                     </li>
                                     <li><a>Settings</a></li>
