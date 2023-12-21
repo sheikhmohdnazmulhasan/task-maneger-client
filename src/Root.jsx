@@ -1,5 +1,7 @@
+import { Outlet } from "react-router-dom";
 
 const Root = () => {
+
     return (
         <div>
             {/* Navbar */}
@@ -23,7 +25,7 @@ const Root = () => {
                         </div>
                     </div>
                     {/* Page content here */}
-                    Content
+                    <Outlet />
                 </div>
                 <div className="drawer-side">
                     <label htmlFor="my-drawer-3" aria-label="close sidebar" className="drawer-overlay"></label>
