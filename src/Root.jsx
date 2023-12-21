@@ -5,8 +5,8 @@ const Root = () => {
 
     function handleAppDownloadButton() {
         Swal.fire({
-            icon:'info',
-            title:'Not Ready Yet',
+            icon: 'info',
+            title: 'Not Ready Yet',
             text: 'Thank you for your interest. Our mobile app is not ready for production yet. We are working on it very quickly. we will let you know when it is available'
         })
     }
@@ -26,19 +26,58 @@ const Root = () => {
                         </div>
                         <div className="flex-1 px-2 mx-2 text-xl font-bold">TASK <span className="text-red-600">FORGE</span></div>
                         <div className="flex-none hidden lg:block">
-                            <ul className="menu menu-horizontal">
-                                {/* Navbar menu content here */}
-                                <li><a>Navbar Item 1</a></li>
-                                <li><a>Navbar Item 2</a></li>
-                            </ul>
+                            <div className="flex items-center">
+                                <ul className="menu menu-horizontal">
+                                    {/* Navbar menu content here */}
+                                    <li><a>Navbar Item 1</a></li>
+                                    <li><a>Navbar Item 2</a></li>
+                                </ul>
+                                <div className="dropdown dropdown-end">
+                                    <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
+                                        <div className="w-10 rounded-full">
+                                            <img alt="Tailwind CSS Navbar component" src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                                        </div>
+                                    </div>
+                                    <ul tabIndex={0} className="mt-3 z-50 bg-white p-2 shadow menu menu-sm dropdown-content rounded-box w-52">
+                                        <li>
+                                            <a className="justify-between">
+                                                Profile
+                                                <span className="badge">New</span>
+                                            </a>
+                                        </li>
+                                        <li><a>Settings</a></li>
+                                        <li><a>Logout</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                           
                         </div>
+                        <div className="flex justify-end md:hidden">
+                                <div className="dropdown dropdown-end">
+                                    <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
+                                        <div className="w-10 rounded-full">
+                                            <img alt="Tailwind CSS Navbar component" src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                                        </div>
+                                    </div>
+                                    <ul tabIndex={0} className="mt-3 z-50 bg-white p-2 shadow menu menu-sm dropdown-content rounded-box w-52">
+                                        <li>
+                                            <a className="justify-between">
+                                                Profile
+                                                <span className="badge">New</span>
+                                            </a>
+                                        </li>
+                                        <li><a>Settings</a></li>
+                                        <li><a>Logout</a></li>
+                                    </ul>
+                                </div>
+                            </div>
                     </div>
                     {/* Page content here */}
                     <Outlet />
                 </div>
-                <div className="drawer-side ">
+                <div className="drawer-side z-50">
                     <label htmlFor="my-drawer-3" aria-label="close sidebar" className="drawer-overlay"></label>
-                    <ul className="menu p-4 w-80 min-h-full bg-base-200 z-50">
+                    <ul className="menu p-4 w-80 min-h-full bg-base-200 bg-opacity-90 z-50">
                         {/* Sidebar content here */}
                         <li><a>Sidebar  1</a></li>
                         <li><a>Sidebar Item 2</a></li>
