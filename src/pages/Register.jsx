@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { IoEye, IoEyeOff } from "react-icons/io5";
+import { Link } from "react-router-dom";
 
 const Register = () => {
     const [showPassword, setShowPassword] = useState(false)
@@ -61,7 +62,7 @@ const Register = () => {
                                 Create an account
                             </button>
                         </div>
-                        <p className="text-sm mt-6 text-center">Already have an account? <span className="text-blue-600 font-semibold hover:underline ml-1">Login here</span></p>
+                        <p className="text-sm mt-6 text-center">Already have an account? <Link to={'/login'} className="text-blue-600 font-semibold hover:underline ml-1">Login here</Link></p>
                     </form>
                 </div>
             </div>
