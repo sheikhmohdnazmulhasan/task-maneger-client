@@ -1,23 +1,40 @@
 import { Link } from "react-router-dom";
 import { IoEye, IoEyeOff } from "react-icons/io5";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { AuthContext } from "../AuthProvider";
+import toast, { Toaster } from "react-hot-toast";
 
 const Login = () => {
     const [showPassword, setShowPassword] = useState(false);
+    const { logInWithEmailAndPassword } = useContext(AuthContext);
+
+    function handleLogIn(event) {
+        event.preventDefault();
+        const email = event.target.email.value;
+        const password = event.target.password.value;
+        const toastId = toast.loading('Working...')
+
+        logInWithEmailAndPassword(email, password).then(user => {
+            console.log(user.user);
+            toast.success('Login Successful', { id: toastId });
+
+        }).catch(err => toast.error(err.code, { id: toastId }));
+    }
 
     return (
         <div>
+            <Toaster />
             <div className="bg-gray-50 font-[sans-serif] text-[#333]">
                 <div className="min-h-screen flex flex-col items-center justify-center py-6 px-4">
                     <div className="max-w-md w-full border py-8 px-6 rounded border-gray-300 bg-white">
                         <p className="text-xl uppercase font-bold text-center">Log in to your account</p>
-                        <form className="mt-10 space-y-4">
+                        <form className="mt-10 space-y-4" onSubmit={handleLogIn}>
                             <div>
                                 <input name="email" type="email" autoComplete="email" required className="w-full text-sm px-4 py-3 rounded outline-none border-2 focus:border-blue-500" placeholder="Email address" />
                             </div>
                             <div>
                                 <div className="flex relative">
-                                    <input name="password" type={showPassword ? 'text' : 'password'} className="bg-white border border-gray-300 w-full text-sm px-4 py-3 rounded-md outline-blue-500" placeholder="Enter password" />
+                                    <input name="password" type={showPassword ? 'text' : 'password'} className="bg-white border border-gray-300 w-full text-sm px-4 py-3 rounded-md outline-blue-500" placeholder="Enter password" required />
                                     {!showPassword ? <IoEye className="absolute right-3 mt-[15px] cursor-pointer" onClick={() => setShowPassword(!showPassword)} /> :
                                         <IoEyeOff className="absolute right-3 mt-[15px] cursor-pointer" onClick={() => setShowPassword(!showPassword)} />}
                                 </div>
@@ -37,15 +54,15 @@ const Login = () => {
                             </div>
 
                             <div className="!mt-10">
-                                <button type="button" className="w-full py-2.5 px-4 text-sm rounded text-white bg-blue-600 hover:bg-blue-700 focus:outline-none">
+                                <button type="submit" className="w-full py-2.5 px-4 text-sm rounded text-white bg-blue-600 hover:bg-blue-700 focus:outline-none">
                                     Log in
                                 </button>
                                 <p className="text-sm mt-6 text-center">Don`t have an account? <Link to={'/register'} className="text-blue-600 font-semibold hover:underline ml-1">Register here</Link></p>
                             </div>
-                            <p class="my-10 text-sm text-gray-400 text-center">or continue with</p>
-                            <div class="space-x-6 flex justify-center">
+                            <p className="my-10 text-sm text-gray-400 text-center">or continue with</p>
+                            <div className="space-x-6 flex justify-center">
                                 <button type="button"
-                                    class="border-none outline-none">
+                                    className="border-none outline-none">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="30px" class="inline" viewBox="0 0 512 512">
                                         <path fill="#fbbd00"
                                             d="M120 256c0-25.367 6.989-49.13 19.131-69.477v-86.308H52.823C18.568 144.703 0 198.922 0 256s18.568 111.297 52.823 155.785h86.308v-86.308C126.989 305.13 120 281.367 120 256z"
