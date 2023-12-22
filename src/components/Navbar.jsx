@@ -42,10 +42,10 @@ const Navbar = () => {
                                 {user ? <div className="dropdown dropdown-end">
                                     <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
                                         <div className="w-10 rounded-full">
-                                            <img alt="Tailwind CSS Navbar component" src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                                            <img alt="Profile" src={user.photoURL} />
                                         </div>
                                     </div>
-                                    <ul tabIndex={0} className="mt-3 z-50 bg-white p-2 shadow menu menu-sm dropdown-content rounded-box w-52">
+                                    <ul tabIndex={0} className="mt-3 z-50 bg-white p-2 shadow menu menu-sm dropdown-content rounded-box w-72">
                                         <li>
                                             <a className="justify-between">
                                                 {user.displayName}
@@ -64,10 +64,10 @@ const Navbar = () => {
                             <div className="dropdown dropdown-end">
                                 <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
                                     <div className="w-10 rounded-full">
-                                        <img alt="Tailwind CSS Navbar component" src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                                        <img alt="Profile" src={user.photoURL} />
                                     </div>
                                 </div>
-                                <ul tabIndex={0} className="mt-3 z-50 bg-white p-2 shadow menu menu-sm dropdown-content rounded-box w-52">
+                                <ul tabIndex={0} className="mt-3 z-50 bg-white p-2 shadow menu menu-sm dropdown-content rounded-box w-72">
                                     <li>
                                         <a className="justify-between">
                                             {user.displayName}
