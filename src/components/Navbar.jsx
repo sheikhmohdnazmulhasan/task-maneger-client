@@ -11,8 +11,10 @@ const Navbar = () => {
 
     const navItem = <>
         <div className="md:flex gap-3 space-y-3 md:space-y-0">
-            <p><NavLink>Navbar Item 1</NavLink></p>
-            <p><NavLink>Navbar Item 2</NavLink></p>
+            <p><NavLink to={'/'}>Home</NavLink></p>
+            <p><NavLink to={'/about'}>About</NavLink></p>
+            <p><NavLink to={'/pricing'}>Pricing</NavLink></p>
+            <p><NavLink to={'/contact'}>Contact</NavLink></p>
         </div>
     </>
     function handleLogout() {
