@@ -5,6 +5,7 @@ import { AuthContext } from "../../AuthProvider";
 
 const Dashboard = () => {
     const {user} = useContext(AuthContext);
+    console.log(user);
 
     return (
         <div>
@@ -48,14 +49,14 @@ const Dashboard = () => {
 
                                     <ul className="-mt-3 text-sm font-semibold text-gray-500 hover:text-gray-700 py-2 px-3 mt-3 divide-y rounded bg-white ">
                                         <li className="items-center py-3">
-                                            <span>801-724-6600 Ext.1272</span><br />
-                                            <span className="ml-auto">415-555-8965</span>
+                                            <span>Joining Date</span><br />
+                                            <span className="ml-auto">{user?.metadata.creationTime}</span>
 
                                         </li>
                                         <li className="items-center py-3">
-                                            <h1>Hire date</h1>
-                                            <span>Jan 19 2017</span><br />
-                                            <span className="ml-auto">10m - 15d</span>
+                                            <h1>Last Logged in Time</h1>
+                                            <span>{user?.metadata.lastSignInTime}</span><br />
+                                            {/* <span className="ml-auto">10m - 15d</span> */}
                                         </li>
 
                                         <li className=" items-center py-3">
