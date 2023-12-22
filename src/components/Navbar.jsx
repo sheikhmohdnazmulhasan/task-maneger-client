@@ -17,7 +17,7 @@ const Navbar = () => {
     </>
     function handleLogout() {
         signOut(auth)
-        toast.success('Logged Out')
+        toast.success('Logged Out');
     }
     return (
         <div>
@@ -49,11 +49,10 @@ const Navbar = () => {
                                         <li>
                                             <a className="justify-between">
                                                 {user.displayName}
-                                                <span className="badge">New</span>
                                             </a>
                                         </li>
-                                        <li><a>Settings</a></li>
-                                        <li onClick={handleLogout}><a>Logout</a></li>
+                                        <li><a>{user.email}</a></li>
+                                        <li onClick={handleLogout}><a className='text-red-500 font-bold'>Logout</a></li>
                                     </ul>
                                 </div> :
                                     <NavLink to={'/login'} className='flex items-center gap-1'>Login <LuLogIn className="text-2xl" /> </NavLink>}
@@ -73,8 +72,8 @@ const Navbar = () => {
                                             {user.displayName}
                                         </a>
                                     </li>
-                                    <li><a>Settings</a></li>
-                                    <li onClick={handleLogout}><a>Logout</a></li>
+                                    <li><a>{user.email}</a></li>
+                                    <li onClick={handleLogout}><a className='text-red-500 font-bold'>Logout</a></li>
                                 </ul>
                             </div>
                         </div> :

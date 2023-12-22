@@ -2,7 +2,7 @@ import axios from "axios";
 import { useContext, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { IoEye, IoEyeOff } from "react-icons/io5";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../AuthProvider";
 import { updateProfile } from "firebase/auth";
 import { auth } from "../firebase.config";
@@ -10,7 +10,8 @@ import { auth } from "../firebase.config";
 const Register = () => {
     const [showPassword, setShowPassword] = useState(false)
     const [showConPassword, setShowConPassword] = useState(false)
-    const { registerUserWithEmailAndPassword, user } = useContext(AuthContext);
+    const { registerUserWithEmailAndPassword } = useContext(AuthContext);
+    const navigate = useNavigate();
 
     async function handleRegister(event) {
         event.preventDefault();
@@ -43,6 +44,7 @@ const Register = () => {
             registerUserWithEmailAndPassword(email, password).then(() => {
                 updateProfile(auth.currentUser, { displayName: name, photoURL: response.data.data.display_url });
                 toast.success('Account created.', { id: toastId });
+                navigate('/');
 
             }).catch(err => toast.error(err.code, { id: toastId }));
 
