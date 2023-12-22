@@ -19,8 +19,9 @@ const Dashboard = () => {
                         </div>
                         <div className="bg-blue-300 hidden md:block max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
                             <h1 className=" text-3xl font-sans tracking-tight text-gray-900">
-                                Charlot Daniel Abbot
+                                {user.displayName}
                             </h1>
+                            <p className="font-semibold">{user.email}</p>
                         </div>
 
                         <div className="bg-blue-300 mx-auto max-w-7xl px-4 hidden md:block py-6 sm:px-6 lg:px-8">
@@ -57,14 +58,6 @@ const Dashboard = () => {
                                             <h1>Last Logged in Time</h1>
                                             <span>{user?.metadata.lastSignInTime}</span><br />
                                             {/* <span className="ml-auto">10m - 15d</span> */}
-                                        </li>
-
-                                        <li className=" items-center py-3">
-                                            <span>Full-time</span><br />
-                                            <span className="ml-auto">Human Resources</span>
-                                            <span className="ml-auto">North America</span>
-                                            <span className="ml-auto">Lindon , Utah</span>
-
                                         </li>
                                     </ul>
                                 </div>
