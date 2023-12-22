@@ -4,17 +4,16 @@ import { useContext } from "react";
 import { AuthContext } from "../../AuthProvider";
 import Swal from "sweetalert2";
 
-
-const Todo = () => {
+const Ongoing = () => {
     const { user } = useContext(AuthContext);
 
     const { data = [], refetch } = useQuery({
-        queryKey: ['todo'],
+        queryKey: ['ongoing'],
         queryFn: async () => {
-            const response = await axios.get(`http://localhost:5000/todo?email=${user.email}`);
+            const response = await axios.get(`http://localhost:5000/ongoing?email=${user.email}`);
             return response.data
         }
-    })
+    });
 
     function handleChangeStatus(_id) {
         Swal.fire({
@@ -27,7 +26,7 @@ const Todo = () => {
             confirmButtonText: "Yes, Change it!"
         }).then((result) => {
             if (result.isConfirmed) {
-                axios.patch(`http://localhost:5000/todo-ongoing?id=${_id}`).then(res => {
+                axios.patch(`http://localhost:5000/todo-completed?id=${_id}`).then(res => {
 
                     if (res.data.modifiedCount > 0) {
                         Swal.fire({
@@ -46,16 +45,15 @@ const Todo = () => {
     return (
         <div>
             <div className="">
-                {data.map(todo => <div key={todo._id} className="card bg-white text-primary mb-3 border md:border-none">
+                {data.map(ongoing => <div key={ongoing._id} className="card bg-white text-primary mb-3 border md:border-none">
                     <div className="card-body">
-                        <h2 className="card-title">{todo?.title}</h2>
-                        <p className="text-black">{todo?.descriptions}</p>
-                        <p>Dateline: {todo?.dateline}</p>
-                        <p>Priority : {todo?.priority}</p>
+                        <h2 className="card-title">{ongoing?.title}</h2>
+                        <p className="text-black">{ongoing?.descriptions}</p>
+                        <p>Dateline: {ongoing?.dateline}</p>
+                        <p>Priority : {ongoing?.priority}</p>
 
                         <div className="card-actions justify-end">
-                            <button className="btn">Edit</button>
-                            <button className="btn" onClick={() => handleChangeStatus(todo._id)}>Ongoing</button>
+                            <button className="btn" onClick={() => handleChangeStatus(ongoing._id)}>Completed</button>
                         </div>
                     </div>
                 </div>)}
@@ -64,4 +62,4 @@ const Todo = () => {
     );
 };
 
-export default Todo;
+export default Ongoing;

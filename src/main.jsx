@@ -11,6 +11,7 @@ import Dashboard from "./pages/dashboard/Dashboard";
 import AddTodo from "./pages/dashboard/AddTodo";
 import Todo from "./pages/dashboard/Todo";
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import Ongoing from "./pages/dashboard/Ongoing";
 const queryClient = new QueryClient()
 
 const router = createBrowserRouter([
@@ -24,7 +25,8 @@ const router = createBrowserRouter([
         path: '/dashboard', element: <Dashboard />,
         children: [
           { index: true, element: <AddTodo /> },
-          { path: '/dashboard/todo', element: <Todo /> }
+          { path: '/dashboard/todo', element: <Todo /> },
+          { path: '/dashboard/ongoing', element: <Ongoing /> }
         ]
       }
     ]
