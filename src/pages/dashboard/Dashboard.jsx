@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import Footer from "../../components/Footer";
 import Navbar from "../../components/Navbar";
 import { AuthContext } from "../../AuthProvider";
@@ -6,6 +6,7 @@ import { Link, NavLink, Outlet } from "react-router-dom";
 
 const Dashboard = () => {
     const { user } = useContext(AuthContext);
+    const [addTodoLinkStyle, setAddTodoLinkStyle] = useState(true)
 
     return (
         <div>
@@ -64,20 +65,20 @@ const Dashboard = () => {
                             <div className=" min-h-96 md:block lg:block ml-2 w-full">
                                 <div className="w-full">
                                     <ul className="flex  ">
-                                        <li className="mr-1 flex md:hidden">
-                                            <NavLink to={'/dashboard'} className={({ isActive }) => isActive ? 'bg-[#2563EB] text-white inline-block py-2 px-4 border-l border-t border-r rounded-t font-semibold' : 'bg-white inline-block py-2 px-4 border-l border-t border-r rounded-t text-blue-500 hover:text-blue-800 font-semibold'} >Add</NavLink>
+                                        <li className="mr-1 flex md:hidden" onClick={()=> setAddTodoLinkStyle(true)}>
+                                            <NavLink to={'/dashboard'} className={addTodoLinkStyle ? 'bg-[#2563EB] text-white inline-block py-2 px-4 border-l border-t border-r rounded-t font-semibold' : 'bg-white inline-block py-2 px-4 border-l border-t border-r rounded-t text-blue-500 hover:text-blue-800 font-semibold'} >Add</NavLink>
                                         </li>
-                                        <li className="mr-1 hidden md:flex">
-                                            <NavLink to={'/dashboard'} className={({ isActive }) => isActive ? 'bg-[#2563EB] text-white inline-block py-2 px-4 border-l border-t border-r rounded-t font-semibold' : 'bg-white inline-block py-2 px-4 border-l border-t border-r rounded-t text-blue-500 hover:text-blue-800 font-semibold'}>Add Todo</NavLink>
+                                        <li className="mr-1 hidden md:flex" onClick={()=> setAddTodoLinkStyle(true)}>
+                                            <NavLink to={'/dashboard'} className={addTodoLinkStyle ? 'bg-[#2563EB] text-white inline-block py-2 px-4 border-l border-t border-r rounded-t font-semibold' : 'bg-white inline-block py-2 px-4 border-l border-t border-r rounded-t text-blue-500 hover:text-blue-800 font-semibold'}>Add Todo</NavLink>
                                         </li>
-                                        <li className="mr-1">
+                                        <li className="mr-1" onClick={()=> setAddTodoLinkStyle(false)}>
                                             <NavLink to={'/dashboard/todo'} className={({ isActive }) => isActive ? 'bg-[#2563EB] text-white inline-block py-2 px-4 border-l border-t border-r rounded-t font-semibold' : 'bg-white inline-block py-2 px-4 border-l border-t border-r rounded-t text-blue-500 hover:text-blue-800 font-semibold'} >Todo</NavLink>
                                         </li>
-                                        <li className="mr-1">
+                                        <li className="mr-1" onClick={()=> setAddTodoLinkStyle(false)}>
                                             <NavLink to={'/dashboard/ongoing'} className={({ isActive }) => isActive ? 'bg-[#2563EB] text-white inline-block py-2 px-4 border-l border-t border-r rounded-t font-semibold' : 'bg-white inline-block py-2 px-4 border-l border-t border-r rounded-t text-blue-500 hover:text-blue-800 font-semibold'}  >Ongoing</NavLink>
                                         </li>
 
-                                        <li className="mr-1">
+                                        <li className="mr-1" onClick={()=> setAddTodoLinkStyle(false)}>
                                             <NavLink to={'/dashboard/completed'} className={({ isActive }) => isActive ? 'bg-[#2563EB] text-white inline-block py-2 px-4 border-l border-t border-r rounded-t font-semibold' : 'bg-white inline-block py-2 px-4 border-l border-t border-r rounded-t text-blue-500 hover:text-blue-800 font-semibold'} >Completed</NavLink>
                                         </li>
 

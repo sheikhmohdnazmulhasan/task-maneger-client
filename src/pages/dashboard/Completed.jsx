@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { AuthContext } from "../../AuthProvider";
 import { useContext } from "react";
+import Swal from "sweetalert2";
 
 const Completed = () => {
     const { user } = useContext(AuthContext);
@@ -15,7 +16,32 @@ const Completed = () => {
     });
 
     function handleDeleteTodo(_id) {
-        console.log(_id);
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+
+                axios.delete(`http://localhost:5000/delete?id=${_id}`).then(res => {
+
+                    if (res.data.deletedCount > 0) {
+                        Swal.fire({
+                            title: "Deleted!",
+                            text: "Your todo has been deleted.",
+                            icon: "success"
+                        });
+
+                        refetch();
+                    }
+
+                }).catch(err => console.log(err))
+            }
+        });
     }
 
     return (
