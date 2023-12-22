@@ -15,6 +15,7 @@ import Ongoing from "./pages/dashboard/Ongoing";
 import Completed from "./pages/dashboard/Completed";
 import PrivateRoute from "./PrivateRoute";
 import Contact from "./pages/Contact";
+import Pricing from "./pages/Pricing";
 const queryClient = new QueryClient()
 
 const router = createBrowserRouter([
@@ -25,6 +26,8 @@ const router = createBrowserRouter([
       { path: '/register', element: <Register /> },
       { path: '/login', element: <Login /> },
       { path: '/contact', element: <Contact /> },
+      { path: '/pricing', element: <Pricing /> },
+
       {
         path: '/dashboard', element: <PrivateRoute><Dashboard /></PrivateRoute>,
         children: [
