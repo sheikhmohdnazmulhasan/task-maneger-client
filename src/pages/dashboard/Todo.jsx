@@ -2,12 +2,13 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useContext } from "react";
 import { AuthContext } from "../../AuthProvider";
+import Swal from "sweetalert2";
 
 
 const Todo = () => {
     const { user } = useContext(AuthContext);
 
-    const { data = [] } = useQuery({
+    const { data = [], refetch } = useQuery({
         queryKey: ['todo'],
         queryFn: async () => {
             const response = await axios.get(`http://localhost:5000/todo?email=${user.email}`);
@@ -16,7 +17,30 @@ const Todo = () => {
     })
 
     function handleChangeStatus(_id) {
-        console.log(_id);
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, Change it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axios.patch(`http://localhost:5000/todo-ongoing?id=${_id}`).then(res => {
+
+                    if (res.data.modifiedCount > 0) {
+                        Swal.fire({
+                            title: "Status Changed",
+                            text: "Your Todo status has been updated.",
+                            icon: "success"
+                        });
+                        refetch()
+                    }
+
+                }).catch(err => console.log(err))
+            }
+        });
     }
 
     return (
@@ -31,7 +55,7 @@ const Todo = () => {
 
                         <div className="card-actions justify-end">
                             <button className="btn">Edit</button>
-                            <button className="btn">Ongoing</button>
+                            <button className="btn" onClick={() => handleChangeStatus(todo._id)}>Ongoing</button>
                         </div>
                     </div>
                 </div>)}
