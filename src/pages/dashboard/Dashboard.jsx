@@ -74,11 +74,11 @@ const Dashboard = () => {
                                             <NavLink to={'/dashboard/todo'} className="bg-white inline-block py-2 px-4 border-l border-t border-r rounded-t text-blue-500 hover:text-blue-800 font-semibold" >Todo</NavLink>
                                         </li>
                                         <li className="mr-1">
-                                            <a className="bg-white inline-block py-2 px-4 border-l border-t border-r rounded-t text-blue-500 hover:text-blue-800 font-semibold" href="#">Ongoing</a>
+                                            <NavLink to={'/dashboard/ongoing'} className="bg-white inline-block py-2 px-4 border-l border-t border-r rounded-t text-blue-500 hover:text-blue-800 font-semibold" >Ongoing</NavLink>
                                         </li>
 
                                         <li className="mr-1">
-                                            <a className="bg-white inline-block py-2 px-4 border-l border-t border-r rounded-t text-blue-500 hover:text-blue-800 font-semibold" href="#">Completed</a>
+                                            <NavLink to={'/dashboard/completed'} className="bg-white inline-block py-2 px-4 border-l border-t border-r rounded-t text-blue-500 hover:text-blue-800 font-semibold" >Completed</NavLink>
                                         </li>
 
                                     </ul>
