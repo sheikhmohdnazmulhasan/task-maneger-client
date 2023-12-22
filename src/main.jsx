@@ -8,6 +8,7 @@ import Register from "./pages/Register";
 import Login from "./pages/Login";
 import AuthProvider from "./AuthProvider";
 import Dashboard from "./pages/dashboard/Dashboard";
+import AddTodo from "./pages/dashboard/AddTodo";
 
 const router = createBrowserRouter([
   {
@@ -15,10 +16,15 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <Home /> },
       { path: '/register', element: <Register /> },
-      { path: '/login', element: <Login /> }
+      { path: '/login', element: <Login /> },
+      {
+        path: '/dashboard', element: <Dashboard />,
+        children: [
+          { index: true, element: <AddTodo /> }
+        ]
+      }
     ]
   },
-  { path: '/dashboard', element: <Dashboard /> }
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(

@@ -2,14 +2,13 @@ import { useContext } from "react";
 import Footer from "../../components/Footer";
 import Navbar from "../../components/Navbar";
 import { AuthContext } from "../../AuthProvider";
+import { Outlet } from "react-router-dom";
 
 const Dashboard = () => {
-    const {user} = useContext(AuthContext);
-    console.log(user);
+    const { user } = useContext(AuthContext);
 
     return (
         <div>
-            <Navbar />
             <body className="md:bg-gray-100 min-h-screen">
                 <div className="min-h-full">
                     <div className="bg-blue-300 flex justify-between">
@@ -19,9 +18,9 @@ const Dashboard = () => {
                         </div>
                         <div className="bg-blue-300 hidden md:block max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
                             <h1 className=" text-3xl font-sans tracking-tight text-gray-900">
-                                {user.displayName}
+                                {user?.displayName}
                             </h1>
-                            <p className="font-semibold">{user.email}</p>
+                            <p className="font-semibold">{user?.email}</p>
                         </div>
 
                         <div className="bg-blue-300 mx-auto max-w-7xl px-4 hidden md:block py-6 sm:px-6 lg:px-8">
@@ -62,39 +61,36 @@ const Dashboard = () => {
                                     </ul>
                                 </div>
                             </div>
-                            <div className=" min-h-96 md:block lg:block ml-2">
-                                <ul className="flex  ">
-                                    <li className="mr-1 flex md:hidden">
-                                        <a className="bg-white inline-block py-2 px-4 border-l border-t border-r rounded-t text-blue-500 hover:text-blue-800 font-semibold" href="#">Add </a>
-                                    </li>
-                                    <li className="mr-1 hidden md:flex">
-                                        <a className="bg-white inline-block py-2 px-4 border-l border-t border-r rounded-t text-blue-500 hover:text-blue-800 font-semibold" href="#">Add Todo</a>
-                                    </li>
-                                    <li className="mr-1">
-                                        <a className="bg-white inline-block py-2 px-4 border-l border-t border-r rounded-t text-blue-500 hover:text-blue-800 font-semibold" href="#">Todo</a>
-                                    </li>
-                                    <li className="mr-1">
-                                        <a className="bg-white inline-block py-2 px-4 border-l border-t border-r rounded-t text-blue-500 hover:text-blue-800 font-semibold" href="#">Ongoing</a>
-                                    </li>
+                            <div className=" min-h-96 md:block lg:block ml-2 w-full">
+                                <div className="w-full">
+                                    <ul className="flex  ">
+                                        <li className="mr-1 flex md:hidden">
+                                            <a className="bg-white inline-block py-2 px-4 border-l border-t border-r rounded-t text-blue-500 hover:text-blue-800 font-semibold" href="#">Add </a>
+                                        </li>
+                                        <li className="mr-1 hidden md:flex">
+                                            <a className="bg-white inline-block py-2 px-4 border-l border-t border-r rounded-t text-blue-500 hover:text-blue-800 font-semibold" href="#">Add Todo</a>
+                                        </li>
+                                        <li className="mr-1">
+                                            <a className="bg-white inline-block py-2 px-4 border-l border-t border-r rounded-t text-blue-500 hover:text-blue-800 font-semibold" href="#">Todo</a>
+                                        </li>
+                                        <li className="mr-1">
+                                            <a className="bg-white inline-block py-2 px-4 border-l border-t border-r rounded-t text-blue-500 hover:text-blue-800 font-semibold" href="#">Ongoing</a>
+                                        </li>
 
-                                    <li className="mr-1">
-                                        <a className="bg-white inline-block py-2 px-4 border-l border-t border-r rounded-t text-blue-500 hover:text-blue-800 font-semibold" href="#">Completed</a>
-                                    </li>
+                                        <li className="mr-1">
+                                            <a className="bg-white inline-block py-2 px-4 border-l border-t border-r rounded-t text-blue-500 hover:text-blue-800 font-semibold" href="#">Completed</a>
+                                        </li>
 
-                                </ul>
-                                <div className="mt-5 ml-5">
-                                    <p className="text-3xl">vvvvvvv</p>
-                                    <p className="text-3xl">vvvvvvv</p>
-                                    <p className="text-3xl">vvvvvvv</p>
-                                    <p className="text-3xl">vvvvvvv</p>
-                                    <p className="text-3xl">vvvvvvv</p>
+                                    </ul>
+                                    <div className="mt-5 px-10 w-full border">
+                                        <Outlet />
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </main>
                 </div>
             </body>
-            <Footer />
         </div>
     );
 };
