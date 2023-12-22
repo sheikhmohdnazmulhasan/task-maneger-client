@@ -2,7 +2,7 @@ import { useContext } from "react";
 import Footer from "../../components/Footer";
 import Navbar from "../../components/Navbar";
 import { AuthContext } from "../../AuthProvider";
-import { Outlet } from "react-router-dom";
+import { Link, NavLink, Outlet } from "react-router-dom";
 
 const Dashboard = () => {
     const { user } = useContext(AuthContext);
@@ -65,13 +65,13 @@ const Dashboard = () => {
                                 <div className="w-full">
                                     <ul className="flex  ">
                                         <li className="mr-1 flex md:hidden">
-                                            <a className="bg-white inline-block py-2 px-4 border-l border-t border-r rounded-t text-blue-500 hover:text-blue-800 font-semibold" href="#">Add </a>
+                                            <NavLink to={'/dashboard'} className="bg-white inline-block py-2 px-4 border-l border-t border-r rounded-t text-blue-500 hover:text-blue-800 font-semibold" >Add</NavLink>
                                         </li>
                                         <li className="mr-1 hidden md:flex">
-                                            <a className="bg-white inline-block py-2 px-4 border-l border-t border-r rounded-t text-blue-500 hover:text-blue-800 font-semibold" href="#">Add Todo</a>
+                                            <NavLink to={'/dashboard'} className="bg-white inline-block py-2 px-4 border-l border-t border-r rounded-t text-blue-500 hover:text-blue-800 font-semibold" >Add Todo</NavLink>
                                         </li>
                                         <li className="mr-1">
-                                            <a className="bg-white inline-block py-2 px-4 border-l border-t border-r rounded-t text-blue-500 hover:text-blue-800 font-semibold" href="#">Todo</a>
+                                            <NavLink to={'/dashboard/todo'} className="bg-white inline-block py-2 px-4 border-l border-t border-r rounded-t text-blue-500 hover:text-blue-800 font-semibold" >Todo</NavLink>
                                         </li>
                                         <li className="mr-1">
                                             <a className="bg-white inline-block py-2 px-4 border-l border-t border-r rounded-t text-blue-500 hover:text-blue-800 font-semibold" href="#">Ongoing</a>
@@ -82,7 +82,7 @@ const Dashboard = () => {
                                         </li>
 
                                     </ul>
-                                    <div className="mt-5 px-10 w-full border">
+                                    <div className="my-5 md:px-10 w-full">
                                         <Outlet />
                                     </div>
                                 </div>

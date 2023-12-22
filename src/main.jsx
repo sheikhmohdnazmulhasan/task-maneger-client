@@ -9,6 +9,9 @@ import Login from "./pages/Login";
 import AuthProvider from "./AuthProvider";
 import Dashboard from "./pages/dashboard/Dashboard";
 import AddTodo from "./pages/dashboard/AddTodo";
+import Todo from "./pages/dashboard/Todo";
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+const queryClient = new QueryClient()
 
 const router = createBrowserRouter([
   {
@@ -20,7 +23,8 @@ const router = createBrowserRouter([
       {
         path: '/dashboard', element: <Dashboard />,
         children: [
-          { index: true, element: <AddTodo /> }
+          { index: true, element: <AddTodo /> },
+          { path: '/dashboard/todo', element: <Todo /> }
         ]
       }
     ]
@@ -29,6 +33,9 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <AuthProvider> <RouterProvider router={router} /></AuthProvider>
+    <QueryClientProvider client={queryClient}>
+      <AuthProvider> <RouterProvider router={router} /></AuthProvider>
+    </QueryClientProvider>
+
   </React.StrictMode>
 );
