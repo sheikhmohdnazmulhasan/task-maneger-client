@@ -29,7 +29,7 @@ const Completed = () => {
                         <p>Priority : {completed?.priority}</p>
 
                         <div className="card-actions justify-end">
-                            <button className="btn" onClick={() => handleDeleteTodo(completed._id)}>Completed</button>
+                            <button className="btn text-white bg-red-500 hover:bg-red-600" onClick={() => handleDeleteTodo(completed._id)}>Delete</button>
                         </div>
                     </div>
                 </div>)}
