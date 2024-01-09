@@ -17,6 +17,7 @@ import PrivateRoute from "./PrivateRoute";
 import Contact from "./pages/Contact";
 import Pricing from "./pages/Pricing";
 import About from "./pages/About";
+import Edit from "./pages/dashboard/Edit";
 const queryClient = new QueryClient()
 
 const router = createBrowserRouter([
@@ -36,7 +37,8 @@ const router = createBrowserRouter([
           { index: true, element: <AddTodo /> },
           { path: '/dashboard/todo', element: <Todo /> },
           { path: '/dashboard/ongoing', element: <Ongoing /> },
-          { path: '/dashboard/completed', element: <Completed /> }
+          { path: '/dashboard/completed', element: <Completed /> },
+          { path: `/dashboard/edit/:id`, element: <Edit />, loader: ({ params }) => fetch(`https://job-task-1-server-sable.vercel.app/edit/${params.id}`) }
         ]
       }
     ]

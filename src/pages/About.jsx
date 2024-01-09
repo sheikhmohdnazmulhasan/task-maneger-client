@@ -1,6 +1,8 @@
 const About = () => {
+    document.title = 'TaskForge | About'
+
     return (
-        <div className='min-h-screen my-20 mx-10'>
+        <div className='min-h-screen my-20 mx-10 overflow-hidden' data-aos="fade-left">
             <div className="bg-white min-h-[475px] text-[#333] font-[sans-serif]">
                 <div className="grid md:grid-cols-2 justify-center items-center max-md:text-center gap-8">
                     <div className="max-w-md mx-auto p-4">

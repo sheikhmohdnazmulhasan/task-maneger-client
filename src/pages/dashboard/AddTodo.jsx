@@ -2,9 +2,12 @@ import { useContext } from "react";
 import { AuthContext } from "../../AuthProvider";
 import axios from "axios";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const AddTodo = () => {
+    document.title = 'TaskForge | Add Todo'
     const { user } = useContext(AuthContext);
+    const navigate = useNavigate();
 
     function handleAddTodo(event) {
         event.preventDefault();
@@ -16,14 +19,15 @@ const AddTodo = () => {
 
         const newTodo = { email: user.email, title, descriptions, dateline, priority, status: 'Todo' };
 
-        axios.post('http://localhost:5000/new-todo', newTodo).then(res => {
+        axios.post('https://job-task-1-server-sable.vercel.app/new-todo', newTodo).then(res => {
 
             if (res.data.insertedId) {
                 Swal.fire({
                     icon: 'success',
                     title: 'Task Added'
-                })
-                form.reset()
+                });
+                form.reset();
+                navigate('/dashboard/todo');
             }
 
         }).catch(err => console.log(err))
@@ -31,7 +35,7 @@ const AddTodo = () => {
     }
 
     return (
-        < div className='flex w-full justify-center' >
+        < div className='flex w-full justify-center' data-aos="fade-up">
             < div className="p-6 rounded-xl lg:col-span-2" >
                 <form onSubmit={handleAddTodo}>
                     <div className="relative flex items-center my-4">

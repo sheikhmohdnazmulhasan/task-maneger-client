@@ -3,14 +3,17 @@ import axios from "axios";
 import { AuthContext } from "../../AuthProvider";
 import { useContext } from "react";
 import Swal from "sweetalert2";
+import Loader from "../../components/Loader";
+import NoData from "../../components/NoData";
 
 const Completed = () => {
+    document.title = 'TaskForge | Completed Todo'
     const { user } = useContext(AuthContext);
 
-    const { data = [], refetch } = useQuery({
+    const { data = [], refetch, isPending } = useQuery({
         queryKey: ['ongoing'],
         queryFn: async () => {
-            const response = await axios.get(`http://localhost:5000/completed?email=${user.email}`);
+            const response = await axios.get(`https://job-task-1-server-sable.vercel.app/completed?email=${user.email}`);
             return response.data
         }
     });
@@ -27,7 +30,7 @@ const Completed = () => {
         }).then((result) => {
             if (result.isConfirmed) {
 
-                axios.delete(`http://localhost:5000/delete?id=${_id}`).then(res => {
+                axios.delete(`https://job-task-1-server-sable.vercel.app/delete?id=${_id}`).then(res => {
 
                     if (res.data.deletedCount > 0) {
                         Swal.fire({
@@ -44,8 +47,16 @@ const Completed = () => {
         });
     }
 
+    if (isPending) {
+        return <Loader />
+    }
+
+    if (data.length < 1) {
+        return <NoData />
+    }
+
     return (
-        <div>
+        <div data-aos="fade-up">
             <div className="">
                 {data.map(completed => <div key={completed._id} className="card bg-white text-primary mb-3 border md:border-none">
                     <div className="card-body">

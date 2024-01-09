@@ -1,6 +1,7 @@
 import Swal from "sweetalert2";
 
 const Pricing = () => {
+    document.title = 'TaskForge | Pricing'
 
     function handlePremiumSubscription() {
         Swal.fire({
@@ -10,7 +11,7 @@ const Pricing = () => {
     }
 
     return (
-        <div className="min-h-screen my-10">
+        <div className="min-h-screen my-10" data-aos="fade-left">
             <div className="font-[sans-serif] text-[#333]">
                 <div className="max-w-5xl mx-auto">
                     <div className="text-center">

@@ -3,15 +3,20 @@ import axios from "axios";
 import { useContext } from "react";
 import { AuthContext } from "../../AuthProvider";
 import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
+import Loader from "../../components/Loader";
+import NoData from "../../components/NoData";
 
 
 const Todo = () => {
+    document.title = 'TaskForge | Todo'
+
     const { user } = useContext(AuthContext);
 
-    const { data = [], refetch } = useQuery({
+    const { data = [], refetch, isPending } = useQuery({
         queryKey: ['todo'],
         queryFn: async () => {
-            const response = await axios.get(`http://localhost:5000/todo?email=${user.email}`);
+            const response = await axios.get(`https://job-task-1-server-sable.vercel.app/todo?email=${user.email}`);
             return response.data
         }
     })
@@ -27,7 +32,7 @@ const Todo = () => {
             confirmButtonText: "Yes, Change it!"
         }).then((result) => {
             if (result.isConfirmed) {
-                axios.patch(`http://localhost:5000/todo-ongoing?id=${_id}`).then(res => {
+                axios.patch(`https://job-task-1-server-sable.vercel.app/todo-ongoing?id=${_id}`).then(res => {
 
                     if (res.data.modifiedCount > 0) {
                         Swal.fire({
@@ -43,8 +48,16 @@ const Todo = () => {
         });
     }
 
+    if (isPending) {
+        return <Loader />
+    }
+
+    if (data.length < 1) {
+        return <NoData />
+    }
+
     return (
-        <div>
+        <div data-aos="fade-up">
             <div className="">
                 {data.map(todo => <div key={todo._id} className="card bg-white text-primary mb-3 border md:border-none">
                     <div className="card-body">
@@ -54,7 +67,7 @@ const Todo = () => {
                         <p>Priority : {todo?.priority}</p>
 
                         <div className="card-actions justify-end">
-                            <button className="btn">Edit</button>
+                            <Link to={`/dashboard/edit/${todo._id}`}> <button className="btn">Edit</button></Link>
                             <button className="btn" onClick={() => handleChangeStatus(todo._id)}>Ongoing</button>
                         </div>
                     </div>
